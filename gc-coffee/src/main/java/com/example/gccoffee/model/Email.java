@@ -39,4 +39,8 @@ public class Email {
                 "address='" + address + '\'' +
                 '}';
     }
+
+    public String getAddress() {
+        return address;
+    }
 }
