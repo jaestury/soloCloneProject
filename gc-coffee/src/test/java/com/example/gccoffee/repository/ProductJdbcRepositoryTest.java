@@ -67,4 +67,20 @@ class ProductJdbcRepositoryTest {
         var product = repository.findByName(newProduct.getProductName());
         assertThat(product.isEmpty(), is(false));
     }
+
+    @Test
+    @Order(3)
+    @DisplayName("상품을 아이디로 조회할 수 있다.")
+    void testFindById(){
+        var product = repository.findById(newProduct.getProductId());
+        assertThat(product.isEmpty(), is(true));    // is 안에 false 값을 넣으면 오류가 발생, 기대는 false인데 실제는 true가 출력된다는 내용 같음.
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("상품을 카테고리로 조회할 수 있다.")
+    void testFindByCategory(){
+        var product = repository.findByCategory(Category.COFFEE_BEAN_PACKAGE);
+        assertThat(product.isEmpty(), is(false));
+    }
 }

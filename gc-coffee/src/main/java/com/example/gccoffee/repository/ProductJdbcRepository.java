@@ -49,7 +49,7 @@ public class ProductJdbcRepository implements ProductRepository {
     public Optional<Product> findById(UUID productId) {
         try{
             return Optional.ofNullable(
-                    jdbcTemplate.queryForObject("SELECT * FROM products WHERE product_id = UUID_TO_BIN(:productId)",
+                    jdbcTemplate.queryForObject("SELECT * FROM products WHERE product_id = (UNHEX(REPLACE(:productId, '-', '')))",
                             Collections.singletonMap("productId", productId.toString().getBytes()), productRowMapper)
             );
 
