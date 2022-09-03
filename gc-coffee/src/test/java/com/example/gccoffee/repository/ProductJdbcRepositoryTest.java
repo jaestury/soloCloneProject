@@ -24,6 +24,7 @@ import static com.wix.mysql.config.MysqldConfig.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ActiveProfiles("test")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ProductJdbcRepositoryTest {
 
     static EmbeddedMysql embeddedMysql;
@@ -73,7 +74,7 @@ class ProductJdbcRepositoryTest {
     @DisplayName("상품을 아이디로 조회할 수 있다.")
     void testFindById(){
         var product = repository.findById(newProduct.getProductId());
-        assertThat(product.isEmpty(), is(true));    // is 안에 false 값을 넣으면 오류가 발생, 기대는 false인데 실제는 true가 출력된다는 내용 같음.
+        assertThat(product.isEmpty(), is(false));
     }
 
     @Test

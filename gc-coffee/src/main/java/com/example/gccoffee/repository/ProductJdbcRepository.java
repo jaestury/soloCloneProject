@@ -47,13 +47,12 @@ public class ProductJdbcRepository implements ProductRepository {
 
     @Override
     public Optional<Product> findById(UUID productId) {
-        try{
+        try {
             return Optional.ofNullable(
                     jdbcTemplate.queryForObject("SELECT * FROM products WHERE product_id = (UNHEX(REPLACE(:productId, '-', '')))",
                             Collections.singletonMap("productId", productId.toString().getBytes()), productRowMapper)
             );
-
-        }catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }
