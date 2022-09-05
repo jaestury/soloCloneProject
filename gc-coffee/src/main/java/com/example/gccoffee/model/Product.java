@@ -9,26 +9,26 @@ public class Product {
     private Category category;
     private long price;
     private String description;
-    private final LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    public final LocalDateTime createdAt;
+    public LocalDateTime updatedAt;
 
     public Product(UUID productId, String productName, Category category, long price){
         this.productId = productId;
         this.productName = productName;
         this.category = category;
         this.price = price;
-        this.createAt = LocalDateTime.now();
-        this.updateAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
-    public Product(UUID productId, String productName, Category category, long price, String description, LocalDateTime createAt, LocalDateTime updateAt) {
+    public Product(UUID productId, String productName, Category category, long price, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.productId = productId;
         this.productName = productName;
         this.category = category;
         this.price = price;
         this.description = description;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public UUID getProductId() {
@@ -52,30 +52,30 @@ public class Product {
     }
 
     public LocalDateTime getCreateAt() {
-        return createAt;
+        return createdAt;
     }
 
     public LocalDateTime getUpdateAt() {
-        return updateAt;
+        return updatedAt;
     }
 
     public void setProductName(String productName) {
         this.productName = productName;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void setCategory(Category category) {
         this.category = category;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void setPrice(long price) {
         this.price = price;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void setDescription(String description) {
         this.description = description;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 }
