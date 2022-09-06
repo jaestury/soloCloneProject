@@ -1,8 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ProductList} from "./components/ProductList";
 import {Summary} from "./components/Summary";
+import axios from "axios";
 
 function App() {
     const [products, setProducts] = useState([
@@ -19,6 +20,10 @@ function App() {
         setItems(updatedItems);
         console.log(products.find(v => v.id == id), "added!")
     }
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/v1/products')
+            .then(v => setProducts(v.data));
+    }, []);
 
   return (
       <div className="container-fluid">
