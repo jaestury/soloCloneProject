@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
-import React from "react";
+import React, {useState} from "react";
 
 function Product(props){
   const productName = props.productName;
@@ -36,23 +36,24 @@ function ProductList({ products = []}){
   )
 }
 
-function Summary(){
+function SummaryItem({ productName, count }){
+    return(
+        <div className="row">
+            <h6 className="p-0">{productName}Columbia Nariñó <span className="badge bg-dark text-">{count}개</span></h6>
+        </div>
+    )
+}
+
+function Summary({items = []}){
+    const totalPrice = items.reduce((prev, curr) => prev + (curr.price * curr.count), 0);
   return (
       <React.Fragment>
         <div>
           <h5 className="m-0 p-0"><b>Summary</b></h5>
         </div>
         <hr/>
-        <div className="row">
-          <h6 className="p-0">Columbia Nariñó <span className="badge bg-dark text-">2개</span></h6>
-        </div>
-        <div className="row">
-          <h6 className="p-0">Brazil Serra Do Caparaó <span className="badge bg-dark">2개</span></h6>
-        </div>
-        <div className="row">
-          <h6 className="p-0">Columbia Nariñó <span className="badge bg-dark">2개</span></h6>
-        </div>
-        <form>
+          {items.map(v => <SummaryItem key={v.id} count={v.count} productName={v.productName}/>)}
+          <form>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">이메일</label>
             <input type="email" className="form-control mb-1" id="email"/>
@@ -69,7 +70,7 @@ function Summary(){
         </form>
         <div className="row pt-2 pb-2 border-top">
           <h5 className="col">총금액</h5>
-          <h5 className="col text-end">15000원</h5>
+          <h5 className="col text-end">{totalPrice}원</h5>
         </div>
         <button className="btn btn-dark col-12">결제하기</button>
       </React.Fragment>
@@ -77,6 +78,15 @@ function Summary(){
 }
 
 function App() {
+    const [products, setProducts] = useState([
+        { id: 'uuid-1', productName: '콜롬비아 커피 1', category:'커피빈', price: 5000},
+        { id: 'uuid-2', productName: '콜롬비아 커피 2', category:'커피빈', price: 5000},
+        { id: 'uuid-3', productName: '콜롬비아 커피 3', category:'커피빈', price: 5000}
+    ]);
+
+    const [items, setItems] = useState([
+
+    ]);
 
   return (
       <div className="container-fluid">
@@ -86,10 +96,10 @@ function App() {
       <div className="card">
         <div className="row">
           <div className="col-md-8 mt-4 d-flex flex-column align-items-start p-3 pt-0">
-            <ProductList/>
+            <ProductList products={products}/>
           </div>
           <div className="col-md-4 summary p-4">
-            <Summary/>
+            <Summary items={items}/>
           </div>
         </div>
       </div>
