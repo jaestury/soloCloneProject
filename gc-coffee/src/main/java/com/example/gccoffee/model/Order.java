@@ -53,6 +53,10 @@ public class Order {
         return createAt;
     }
 
+    public LocalDateTime getUpdateAt(){
+        return updateAt;
+    }
+
     public void setAddress(String address) {
         this.address = address;
         this.updateAt = LocalDateTime.now();
