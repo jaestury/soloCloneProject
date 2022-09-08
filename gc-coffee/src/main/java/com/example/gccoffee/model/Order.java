@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Order {
-    private final UUID orderId;
+    public final UUID orderId;
     private final Email email;
     private String address;
     private String postcode;
